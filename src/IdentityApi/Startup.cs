@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-  
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +42,8 @@ namespace IdentityApi
                     .AddEntityFrameworkStores<ApplicationContext>()
                     .AddDefaultTokenProviders();
 
-            services.Configure<IdentityOptions>(options => {
+            services.Configure<IdentityOptions>(options =>
+            {
                 options.Password.RequiredLength = 6;
                 options.Password.RequireDigit = false;
                 options.Password.RequireLowercase = false;
@@ -59,13 +60,28 @@ namespace IdentityApi
                     .AddProfileService<ProfileService>();
 
             services.AddAuthentication("Bearer")
-                    .AddJwtBearer("Bearer", options => {
-                            options.Authority = "http://localhost:5000";
-                            options.RequireHttpsMetadata = false;
-                            options.Audience = "book";
+                    .AddJwtBearer("Bearer", options =>
+                    {
+                        options.Authority = "https://localhost:5000";
+                        options.RequireHttpsMetadata = false;
+                        options.Audience = "book";
                     });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("_myAllowSpecificOrigins",
+                    builder =>
+                    {
+                        builder.WithOrigins(
+                                "http://localhost:3000",
+                                "http://localhost:3001"
+                            )
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
         }
-        public void Configure(IApplicationBuilder app, 
+        public void Configure(IApplicationBuilder app,
                               IWebHostEnvironment env,
                               ApplicationContext context,
                               RoleManager<IdentityRole> role,
@@ -79,6 +95,12 @@ namespace IdentityApi
             //app.UseStaticFiles();
             app.UseRouting();
 
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+            );
+
             app.UseIdentityServer();
 
             // uncomment, if you want to add MVC
@@ -86,10 +108,10 @@ namespace IdentityApi
             app.UseAuthentication();
             app.UseEndpoints(endpoints =>
             {
-               endpoints.MapDefaultControllerRoute();
+                endpoints.MapDefaultControllerRoute();
             });
 
-            SeedData.Initialize(context,user,role).Wait();
+            SeedData.Initialize(context, user, role).Wait();
         }
     }
 }

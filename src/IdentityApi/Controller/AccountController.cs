@@ -49,7 +49,7 @@ namespace IdentityApi.Controller
         {
             var client = new HttpClient();
             
-            var disco = await client.GetDiscoveryDocumentAsync("http://localhost:5000");
+            var disco = await client.GetDiscoveryDocumentAsync("https://localhost:5000");
             if (disco.IsError)
             {
                 return BadRequest(new {success = false, message = disco.Error});
@@ -69,7 +69,10 @@ namespace IdentityApi.Controller
             {
                 return BadRequest(new {success = false, message = tokenResponse.ErrorDescription});
             }
-            return Ok(new {success = true,token = tokenResponse.Json});
+            // data user
+            var user = await _userManager.FindByNameAsync(model.PhoneNumber);
+            user.PasswordHash = null;
+            return Ok(new {success = true,token = tokenResponse.Json, data = user});
         }
     }
 }
