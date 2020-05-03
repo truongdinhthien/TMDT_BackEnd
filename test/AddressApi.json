@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "f4c2b7ef-f379-49e8-b06c-6a52ce439b94",
+		"name": "AddressApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetAllCity",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5003/api/city",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"api",
+						"city"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCityById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5003/api/city/4",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"api",
+						"city",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllDistrictByIdCity",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5003/api/city/4/district",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"api",
+						"city",
+						"4",
+						"district"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllWardByIdDistrict",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5003/api/district/9/ward",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"api",
+						"district",
+						"9",
+						"ward"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
