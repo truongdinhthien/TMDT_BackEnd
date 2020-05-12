@@ -19,6 +19,7 @@ namespace IdentityApi.Data
 
             string role1 = "Admin";
             string role2 = "Staff";
+            string role3 = "Customer";
 
             if (await roleManager.FindByNameAsync(role1) == null)
             {
@@ -27,6 +28,10 @@ namespace IdentityApi.Data
             if (await roleManager.FindByNameAsync(role2) == null)
             {
                 await roleManager.CreateAsync(new IdentityRole(role2));
+            }
+            if (await roleManager.FindByNameAsync(role3) == null)
+            {
+                await roleManager.CreateAsync(new IdentityRole(role3));
             }
 
             if (await userManager.FindByNameAsync("0913111111") == null)
@@ -115,6 +120,7 @@ namespace IdentityApi.Data
                 if (result.Succeeded)
                 {
                     await userManager.AddPasswordAsync(user, password);
+                    await userManager.AddToRoleAsync(user, role3);
                 }
             }
 
@@ -132,6 +138,7 @@ namespace IdentityApi.Data
                 if (result.Succeeded)
                 {
                     await userManager.AddPasswordAsync(user, password);
+                    await userManager.AddToRoleAsync(user, role3);
                 }
             }
         }

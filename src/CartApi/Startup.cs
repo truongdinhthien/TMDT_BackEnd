@@ -12,6 +12,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using StackExchange.Redis;
+using CartApi.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace CartApi
 {
@@ -29,9 +31,18 @@ namespace CartApi
         {
             services.AddControllers();
 
+            // services.AddAuthentication("Bearer")
+            //         .AddJwtBearer("Bearer", options =>
+            //         {
+            //             options.Authority = "https://localhost:5000";
+            //             options.RequireHttpsMetadata = false;
+            //             options.Audience = "book";
+            //         });
             var connectionMultiplexer = ConnectionMultiplexer.Connect(Configuration.GetConnectionString("RedisConnect"));
             var database = connectionMultiplexer.GetDatabase(0);
             services.AddScoped<IDatabase>(_ => database);
+            services.AddScoped<CartService>();
+            services.AddScoped<UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +56,8 @@ namespace CartApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

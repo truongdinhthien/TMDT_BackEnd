@@ -6,13 +6,13 @@ namespace CartApi.Models
     {
         public Cart() { }
 
-        public Cart(string buyerId)
+        public Cart(string _buyerId)
         {
-            Id = buyerId;
+            buyerId = _buyerId;
         }
 
-        public string Id { get; set; }
+        public string buyerId { get; set; }
         
-        public IEnumerable<CartItem> Items { get; set; } = new List<CartItem>();
+        public List<CartItem> Items { get; set; } = new List<CartItem>();
     }
 }

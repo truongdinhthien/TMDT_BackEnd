@@ -33,7 +33,11 @@ namespace IdentityApi.Controller
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if(result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, "Customer");
                 return Ok(new {success = true, message = "Register Successfully"});
+            }
+                
             else 
             {
                 if(result.Errors.Any(x => x.Code == "DuplicateUserName"))
@@ -41,7 +45,7 @@ namespace IdentityApi.Controller
                     return BadRequest(new {success = false, message = "Duplicate user name error"});
                 }
             }
-                return BadRequest(new {success = false, message = "Register Failed", error = result.Errors});
+            return BadRequest(new {success = false, message = "Register Failed", error = result.Errors});
         }
         [Route("api/account/login")]
         [HttpPost]
@@ -72,7 +76,16 @@ namespace IdentityApi.Controller
             // data user
             var user = await _userManager.FindByNameAsync(model.PhoneNumber);
             user.PasswordHash = null;
-            return Ok(new {success = true,token = tokenResponse.Json, data = user});
+
+            var roleSource = await _userManager.GetRolesAsync(user);
+            var role = roleSource.FirstOrDefault();
+
+            var userDTO = new UserDTO {
+                user = user,
+                Role = role
+            };
+
+            return Ok(new {success = true,token = tokenResponse.Json, data = userDTO});
         }
     }
 }
