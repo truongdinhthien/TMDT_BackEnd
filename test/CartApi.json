@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "54386df4-7b5d-4959-a672-d3a63bd9087d",
+		"name": "CartApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetCart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6Ino1eGdxdmVSRWo5OHptV3F4NWt0c2ciLCJ0eXAiOiJhdCtqd3QifQ.eyJuYmYiOjE1ODkxOTU2NjksImV4cCI6MTU4OTE5OTI2OSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NTAwMCIsImF1ZCI6ImJvb2siLCJjbGllbnRfaWQiOiJjbGllbnQiLCJzdWIiOiI5YjA3MjQ2MS0xY2RhLTQxN2MtOTUxZC02NDkxMDdjMTg0NTAiLCJhdXRoX3RpbWUiOjE1ODkxOTU2NjksImlkcCI6ImxvY2FsIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ3VzdG9tZXIiLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwiYm9vayJdLCJhbXIiOlsicHdkIl19.D_BJ0kjbgjWh6xWm3VMVM7rc8LVFxkMwdnzgRx-daNv3mnKeG-8TihGWrd-VDpPCbqi7nAYduXVIGUMFbkeh3Su7tMVBYQmACnIGhHy5zM_SS7tQHd506kcelCYpHlWUgvXrwW9qT-BLI3gJ8q69NznTcBtOBIiZ0EvcjmJ5PCse6xhoHb4BE055Njy-i2uuTPLlDImgKSaOFhAtK-yxbsOYJHUko-FcGU-sZB4sio0NqfD3bZQNnFD6KCMaQbOm8vmL1AT_OqEuZjuLTs5Jeel5q9UX9TaGTJokTHyLRL6tyjKB-6QnwuXxM0EB7Nm7Ry74nqYzzn1ARgF5Crsdlg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5002/api/cart/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"api",
+						"cart",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddCart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6Ino1eGdxdmVSRWo5OHptV3F4NWt0c2ciLCJ0eXAiOiJhdCtqd3QifQ.eyJuYmYiOjE1ODkxOTU2NjksImV4cCI6MTU4OTE5OTI2OSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NTAwMCIsImF1ZCI6ImJvb2siLCJjbGllbnRfaWQiOiJjbGllbnQiLCJzdWIiOiI5YjA3MjQ2MS0xY2RhLTQxN2MtOTUxZC02NDkxMDdjMTg0NTAiLCJhdXRoX3RpbWUiOjE1ODkxOTU2NjksImlkcCI6ImxvY2FsIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ3VzdG9tZXIiLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwiYm9vayJdLCJhbXIiOlsicHdkIl19.D_BJ0kjbgjWh6xWm3VMVM7rc8LVFxkMwdnzgRx-daNv3mnKeG-8TihGWrd-VDpPCbqi7nAYduXVIGUMFbkeh3Su7tMVBYQmACnIGhHy5zM_SS7tQHd506kcelCYpHlWUgvXrwW9qT-BLI3gJ8q69NznTcBtOBIiZ0EvcjmJ5PCse6xhoHb4BE055Njy-i2uuTPLlDImgKSaOFhAtK-yxbsOYJHUko-FcGU-sZB4sio0NqfD3bZQNnFD6KCMaQbOm8vmL1AT_OqEuZjuLTs5Jeel5q9UX9TaGTJokTHyLRL6tyjKB-6QnwuXxM0EB7Nm7Ry74nqYzzn1ARgF5Crsdlg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"buyerId\" : \"1\",\n\t\"Id\" : 1,\n\t\"Name\" : \"Sách 2\",\n\t\"Price\" : 21000,\n\t\"Amount\" : 3,\n\t\"imagePath\" : \"this is link pictute\"\n}\n\t",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5002/api/cart",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"api",
+						"cart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutCart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6Ino1eGdxdmVSRWo5OHptV3F4NWt0c2ciLCJ0eXAiOiJhdCtqd3QifQ.eyJuYmYiOjE1ODkxOTU2NjksImV4cCI6MTU4OTE5OTI2OSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NTAwMCIsImF1ZCI6ImJvb2siLCJjbGllbnRfaWQiOiJjbGllbnQiLCJzdWIiOiI5YjA3MjQ2MS0xY2RhLTQxN2MtOTUxZC02NDkxMDdjMTg0NTAiLCJhdXRoX3RpbWUiOjE1ODkxOTU2NjksImlkcCI6ImxvY2FsIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ3VzdG9tZXIiLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwiYm9vayJdLCJhbXIiOlsicHdkIl19.D_BJ0kjbgjWh6xWm3VMVM7rc8LVFxkMwdnzgRx-daNv3mnKeG-8TihGWrd-VDpPCbqi7nAYduXVIGUMFbkeh3Su7tMVBYQmACnIGhHy5zM_SS7tQHd506kcelCYpHlWUgvXrwW9qT-BLI3gJ8q69NznTcBtOBIiZ0EvcjmJ5PCse6xhoHb4BE055Njy-i2uuTPLlDImgKSaOFhAtK-yxbsOYJHUko-FcGU-sZB4sio0NqfD3bZQNnFD6KCMaQbOm8vmL1AT_OqEuZjuLTs5Jeel5q9UX9TaGTJokTHyLRL6tyjKB-6QnwuXxM0EB7Nm7Ry74nqYzzn1ARgF5Crsdlg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Id\" : 2,\n\t\"Name\" : \"Sách 1\",\n\t\"Price\" : 20000,\n\t\"Amount\" : 5,\n\t\"imagePath\" : \"this is link pictute\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5002/api/cart/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"api",
+						"cart",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteCart",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "2",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5002/api/cart/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"api",
+						"cart",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

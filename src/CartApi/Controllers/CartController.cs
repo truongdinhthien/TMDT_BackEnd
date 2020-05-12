@@ -13,7 +13,7 @@ namespace CartApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    // [Authorize]
+    [Authorize]
     
     public class CartController : ControllerBase
     {
@@ -25,13 +25,13 @@ namespace CartApi.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
-        public IActionResult GetAsync ()
-        {
-            var user = _userService.GetUser(HttpContext.User);
-            var claims = User.Claims.Select(c => new { c.Type, c.Value }).ToArray();
-            return Ok(new { message = "Hello API", data = user, claims = claims });
-        }
+        // [HttpGet]
+        // public IActionResult GetAsync ()
+        // {
+        //     var user = _userService.GetUser(HttpContext.User);
+        //     var claims = User.Claims.Select(c => new { c.Type, c.Value }).ToArray();
+        //     return Ok(new { message = "Hello API", data = user, claims = claims });
+        // }
 
 
         [HttpGet("{key}")]

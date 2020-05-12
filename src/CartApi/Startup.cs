@@ -31,13 +31,13 @@ namespace CartApi
         {
             services.AddControllers();
 
-            // services.AddAuthentication("Bearer")
-            //         .AddJwtBearer("Bearer", options =>
-            //         {
-            //             options.Authority = "https://localhost:5000";
-            //             options.RequireHttpsMetadata = false;
-            //             options.Audience = "book";
-            //         });
+            services.AddAuthentication("Bearer")
+                    .AddJwtBearer("Bearer", options =>
+                    {
+                        options.Authority = "https://localhost:5000";
+                        options.RequireHttpsMetadata = false;
+                        options.Audience = "book";
+                    });
             var connectionMultiplexer = ConnectionMultiplexer.Connect(Configuration.GetConnectionString("RedisConnect"));
             var database = connectionMultiplexer.GetDatabase(0);
             services.AddScoped<IDatabase>(_ => database);

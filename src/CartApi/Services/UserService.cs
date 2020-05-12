@@ -8,6 +8,7 @@ namespace CartApi.Services
         public User GetUser (ClaimsPrincipal user) 
         {
             return new User {
+                // user.Claims.GetType("")
                 UsetId = user.FindFirstValue("sub")
             };
         }
