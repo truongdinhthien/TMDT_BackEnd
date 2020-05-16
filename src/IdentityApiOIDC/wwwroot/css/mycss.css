@@ -1,0 +1,14 @@
+.text-danger{
+    margin-top: 0px;
+    color: red;
+    font-size: 12px;
+}
+
+ul {
+  list-style-type: none;
+  padding-inline-start: 0px;
+}
+
+.nobull {
+  list-style-type: none;
+ }

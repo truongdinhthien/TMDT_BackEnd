@@ -6,89 +6,228 @@
 	},
 	"item": [
 		{
-			"name": "GetAllCity",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:5003/api/city",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "5003",
-					"path": [
-						"api",
-						"city"
-					]
+			"name": "Address",
+			"item": [
+				{
+					"name": "GetAllCity",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5003/api/city",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5003",
+							"path": [
+								"api",
+								"city"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCityById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5003/api/city/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5003",
+							"path": [
+								"api",
+								"city",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllDistrictByIdCity",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5003/api/city/4/district",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5003",
+							"path": [
+								"api",
+								"city",
+								"4",
+								"district"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllWardByIdDistrict",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5003/api/district/9/ward",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5003",
+							"path": [
+								"api",
+								"district",
+								"9",
+								"ward"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "GetCityById",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:5003/api/city/4",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "5003",
-					"path": [
-						"api",
-						"city",
-						"4"
-					]
+			"name": "AddressUser",
+			"item": [
+				{
+					"name": "GetAddressByUserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5003/api/addressuser?userid=2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5003",
+							"path": [
+								"api",
+								"addressuser"
+							],
+							"query": [
+								{
+									"key": "userid",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostAddress",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"UserId\" : \"2\",\n\t\"FullName\" : \"1\",\n\t\"PhoneNumber\" : \"3\",\n\t\"City\" : \"4\",\n\t\"Ward\" : \"5\",\n\t\"District\" : \"6\",\n\t\"Street\" : \"7\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5003/api/addressuser",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5003",
+							"path": [
+								"api",
+								"addressuser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAddressById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5003/api/addressuser/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5003",
+							"path": [
+								"api",
+								"addressuser",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PutAddress",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"UserId\" : \"2\",\n\t\"FullName\" : \"putted\",\n\t\"PhoneNumber\" : \"3\",\n\t\"City\" : \"4\",\n\t\"Ward\" : \"5\",\n\t\"District\" : \"6\",\n\t\"Street\" : \"7\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5003/api/addressuser/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5003",
+							"path": [
+								"api",
+								"addressuser",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAddress",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5003/api/addressuser/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5003",
+							"path": [
+								"api",
+								"addressuser",
+								"3"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "GetAllDistrictByIdCity",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:5003/api/city/4/district",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "5003",
-					"path": [
-						"api",
-						"city",
-						"4",
-						"district"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GetAllWardByIdDistrict",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:5003/api/district/9/ward",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "5003",
-					"path": [
-						"api",
-						"district",
-						"9",
-						"ward"
-					]
-				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}
