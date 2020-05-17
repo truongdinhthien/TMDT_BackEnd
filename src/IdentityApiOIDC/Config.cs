@@ -29,15 +29,14 @@ namespace IdentityApiOIDC
                 new Client
                 {
                     ClientId = "client",
-                    ClientSecrets = { new Secret("secret".Sha256()) },
-
+                    RequireClientSecret = false,
                     AllowedGrantTypes = GrantTypes.Code,
                     RequireConsent = false,
                     RequirePkce = true,
                     AlwaysIncludeUserClaimsInIdToken = true,
 
-                    RedirectUris = { "http://localhost:3000/signin-oidc" },
-                    PostLogoutRedirectUris = { "http://localhost:3000/signout-callback-oidc" },
+                    RedirectUris = { "http://localhost:3000/signin-oidc.html" },
+                    PostLogoutRedirectUris = { "http://localhost:3000/logout.html" },
                     AllowedCorsOrigins = {"http://localhost:3000"},
 
                     AllowedScopes = new List<string>

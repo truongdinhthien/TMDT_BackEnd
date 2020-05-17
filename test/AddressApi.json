@@ -105,7 +105,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:5003/api/addressuser?userid=2",
+							"raw": "https://localhost:5003/api/addressuser",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -114,12 +114,6 @@
 							"path": [
 								"api",
 								"addressuser"
-							],
-							"query": [
-								{
-									"key": "userid",
-									"value": "2"
-								}
 							]
 						}
 					},
@@ -132,7 +126,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"UserId\" : \"2\",\n\t\"FullName\" : \"1\",\n\t\"PhoneNumber\" : \"3\",\n\t\"City\" : \"4\",\n\t\"Ward\" : \"5\",\n\t\"District\" : \"6\",\n\t\"Street\" : \"7\"\n}",
+							"raw": "{\n\t\"UserId\" : \"User 2\",\n\t\"FullName\" : \"Fullname 2\",\n\t\"PhoneNumber\" : \"0123456789\",\n\t\"City\" : \"City 3\",\n\t\"Ward\" : \"Ward 3\",\n\t\"District\" : \"District 3\",\n\t\"Street\" : \"Street 3\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -182,7 +176,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"UserId\" : \"2\",\n\t\"FullName\" : \"putted\",\n\t\"PhoneNumber\" : \"3\",\n\t\"City\" : \"4\",\n\t\"Ward\" : \"5\",\n\t\"District\" : \"6\",\n\t\"Street\" : \"7\"\n}",
+							"raw": "{\n\t\"UserId\" : \"User 1\",\n\t\"FullName\" : \"Fullname 1\",\n\t\"PhoneNumber\" : \"0123456789\",\n\t\"City\" : \"City Putted\",\n\t\"Ward\" : \"Ward 1\",\n\t\"District\" : \"District 1\",\n\t\"Street\" : \"Street 1\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -211,7 +205,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:5003/api/addressuser/3",
+							"raw": "https://localhost:5003/api/addressuser/1",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -220,7 +214,38 @@
 							"path": [
 								"api",
 								"addressuser",
-								"3"
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ChangeDefault",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5003/api/addressuser/changedefault/2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5003",
+							"path": [
+								"api",
+								"addressuser",
+								"changedefault",
+								"2"
 							]
 						}
 					},

@@ -49,7 +49,8 @@ namespace IdentityApiOIDC
                     .AddInMemoryIdentityResources(Config.Ids)
                     .AddInMemoryApiResources(Config.Apis)
                     .AddInMemoryClients(Config.Clients)
-                    .AddAspNetIdentity<User>();
+                    .AddAspNetIdentity<User>()
+                    .AddProfileService<ProfileService>();
 
             // services.AddAuthorization();
         }

@@ -38,9 +38,25 @@ namespace IdentityApiOIDC.Controllers
             _events = events;
         }
         [HttpGet]
+        public async Task<IActionResult> Logout(string logoutId)
+        {
+            await _signInManager.SignOutAsync();
+
+            return Redirect("http://localhost:3000");
+            // var logoutRequest = await _interaction.GetLogoutContextAsync(logoutId);
+
+            // if (string.IsNullOrEmpty(logoutRequest.PostLogoutRedirectUri))
+            // {
+            //     return RedirectToAction("Index", "Home");
+            // }
+
+            // return Redirect(logoutRequest.PostLogoutRedirectUri);
+        }
+        [HttpGet]
         public IActionResult Login (string ReturnUrl)
         {
             Console.WriteLine("This is get");
+            
             return View(new LoginViewModel{ReturnUrl = ReturnUrl});
         }        
         [HttpPost]
@@ -66,9 +82,37 @@ namespace IdentityApiOIDC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Register ()
+        public IActionResult Register (string returnUrl)
         {
-            return View();
+            return View(new RegisterViewModel { ReturnUrl = returnUrl });
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register (RegisterViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+
+            var user = new User () {PhoneNumber = vm.PhoneNumber, UserName = vm.PhoneNumber, Fullname = vm.Fullname};
+            var result = await _userManager.CreateAsync(user, vm.Password);
+
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, "Customer");
+                await _signInManager.SignInAsync(user, false);
+
+                return Redirect(vm.ReturnUrl);
+            }
+            
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("",error.Description);
+            }
+
+            return View(vm);
         }
         
     }
