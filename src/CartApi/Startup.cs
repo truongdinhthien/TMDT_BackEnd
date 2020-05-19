@@ -34,7 +34,7 @@ namespace CartApi
             services.AddAuthentication("Bearer")
                     .AddJwtBearer("Bearer", options =>
                     {
-                        options.Authority = "https://localhost:5000";
+                        options.Authority = "https://localhost:3117";
                         options.RequireHttpsMetadata = false;
                         options.Audience = "book";
                     });

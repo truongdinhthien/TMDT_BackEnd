@@ -55,9 +55,11 @@ namespace IdentityApiOIDC.Controllers
         [HttpGet]
         public IActionResult Login (string ReturnUrl)
         {
-            Console.WriteLine("This is get");
-            
-            return View(new LoginViewModel{ReturnUrl = ReturnUrl});
+            var isLogin =  User.Identity.IsAuthenticated;
+                if (!isLogin)       
+                    return View(new LoginViewModel{ReturnUrl = ReturnUrl});
+                else 
+                    return Redirect("http://localhost:3117/account/islogin");
         }        
         [HttpPost]
         public async Task<IActionResult> Login (LoginViewModel model)
