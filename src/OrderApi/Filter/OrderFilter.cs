@@ -7,5 +7,6 @@ namespace OrderApi.Filter
         public int Status {get;set;} = 0;
         public DateTime DateFrom {get;set;}
         public DateTime DateTo {get;set;}
+
     }
 }

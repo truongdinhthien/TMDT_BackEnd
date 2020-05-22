@@ -4,28 +4,40 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using AddressApi.Models;
+using Microsoft.AspNetCore.Authorization;
+using AddressApi.Configuration;
+using Microsoft.AspNetCore.Authentication;
 
 namespace AddressApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AddressUser : ControllerBase
     {
         private readonly AddressContext _context;
+        private readonly ITokenConfiguration _token;
 
-        public AddressUser(AddressContext context)
+        public AddressUser(AddressContext context, ITokenConfiguration token)
         {
             _context = context;
+            _token = token;
         }
+
         [HttpGet]
-        public async Task<IActionResult> GetAddressByUser([FromQuery] string userId)
+        public async Task<IActionResult> GetAddressByUser()
         {
             var addressList = await _context.Addresses.ToListAsync();
-            if (userId != null)
+
+            string access_token = await HttpContext.GetTokenAsync("access_token");
+
+            var user = await _token.GetPayloadAsync(access_token);
+            
+            if (user != null)
             {
-                addressList = addressList.Where(a => a.UserId == userId).ToList();
+                addressList = addressList.Where(a => a.UserId == user.UserId).ToList();
             }
-            return Ok(new { success = true, data = addressList });
+            return Ok(new { success = true, data = addressList});
         }
 
         [HttpGet("{id}")]
@@ -41,7 +53,14 @@ namespace AddressApi.Controllers
         public async Task<IActionResult> PostAddress([FromBody] Address address)
         {
             var addressList = await _context.Addresses.ToListAsync();
+
+            string access_token = await HttpContext.GetTokenAsync("access_token");
+
+            var user = await _token.GetPayloadAsync(access_token);
+            address.UserId = user.UserId;
             addressList = addressList.Where(a => a.UserId == address.UserId).ToList();
+
+
 
             if (addressList.Count() > 0)
             {

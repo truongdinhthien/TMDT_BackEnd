@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using AddressApi.Configuration;
 using AddressApi.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +35,14 @@ namespace AddressApi
 
             services.AddDbContext<AddressContext>(options => options.UseSqlite("Data Source=Address.db"));
 
+            services.AddAuthentication("Bearer")
+                    .AddJwtBearer("Bearer", options =>
+                    {
+                        options.Authority = "https://localhost:3117";
+                        options.RequireHttpsMetadata = false;
+                        options.Audience = "book";
+                    });
+
             services.AddCors(options =>
             {
                 options.AddPolicy("_myAllowSpecificOrigins",
@@ -49,6 +58,7 @@ namespace AddressApi
             });
 
             services.AddScoped<HttpClient>(_ => new HttpClient());
+            services.AddScoped<ITokenConfiguration,TokenConfiguration>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,6 +77,8 @@ namespace AddressApi
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
