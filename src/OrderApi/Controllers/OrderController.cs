@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OrderApi.Configuration;
 using OrderApi.Data;
+using OrderApi.Filter;
 using OrderApi.Models;
 
 namespace OrderApi.Controllers
@@ -29,25 +30,25 @@ namespace OrderApi.Controllers
         
 
         [HttpGet]
-        public async Task<IActionResult> GetOrder ()
+        public async Task<IActionResult> GetOrder ([FromQuery] OrderFilter filter)
         {
             var orderSource = await _context.Orders.Include(o => o.OrderItems).ToListAsync();
 
             string access_token = await HttpContext.GetTokenAsync("access_token");
 
-            var user = await _token.GetPayloadAsync(access_token);
+            var user = _token.GetPayloadAsync(access_token);
 
-            var order = orderSource.Where(o => o.UserId == user.UserId).ToList();
+            var order = orderSource.Where(o => o.BuyerId == user.UserId).ToList();
 
             var totalAllPrice = 0;
 
-            foreach (var item in orderSource)
+            foreach (var item in order)
             {
                 if(item.Status != 4)
                     totalAllPrice += item.Total;
             }
         
-            return Ok (new {success = true, data = order, totalAllPrice = totalAllPrice});
+            return Ok (new {success = true,filter = filter, data = order, totalAllPrice = totalAllPrice});
         }
 
         [HttpGet("{id}")]
@@ -70,7 +71,7 @@ namespace OrderApi.Controllers
             order.Status = 1;
             string access_token = await HttpContext.GetTokenAsync("access_token");
 
-            var user = await _token.GetPayloadAsync(access_token);
+            var user = _token.GetPayloadAsync(access_token);
 
             order.BuyerId = user.UserId;
             

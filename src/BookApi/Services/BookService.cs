@@ -91,13 +91,6 @@ namespace BookApi.Services
         }
         public async Task<IActionResult> PostBookAsync(Book book)
         {
-            //Check null
-            bool isNull = book.GetType().GetProperties().All(p => p.GetValue(book) == null);
-
-            if(isNull)
-            {
-                return BadRequest(new { success = false, message = "Vui lòng thêm đầy đủ thông tin" });
-            }
             //Check images
             if (book.Images == null && book.Images.Count == 0)
             {
@@ -122,6 +115,8 @@ namespace BookApi.Services
                 return BadRequest(new { success = false, message = "slug bị trùng" });
             }
 
+            // if (book.CategoryId == 0) return BadRequest (new {success = false, message = "Thêm danh mục sản phẩm"});
+
             var ImagePaths = convertImageToPath(book.Images);
             if (ImagePaths.Count == 0)
                 return BadRequest(new { success = false, message = "Lỗi Sever" });
@@ -132,13 +127,22 @@ namespace BookApi.Services
             return Ok(new { success = true, message = "Thêm thành công" });
         }
 
-        public async Task<IActionResult> UpdateBookAsync(int id, int rate)
+        public async Task<IActionResult> RateBookAsync(int id, int rate)
         {
             var bookResource = await _context.Books.FirstOrDefaultAsync(b => b.BookId == id);
             
             if (bookResource != null)
             {
-                bookResource.Rate1 = rate;
+                if ( rate > 5 || rate < 1) return BadRequest(new {success = false, message ="Rate is range 1 to 5"});
+                switch (rate)
+                {
+                    case 1 : bookResource.Rate1++; break;
+                    case 2 : bookResource.Rate2++; break;
+                    case 3 : bookResource.Rate3++; break;
+                    case 4 : bookResource.Rate4++; break;
+                    case 5 : bookResource.Rate5++; break;
+                    default:  break;
+                }
                 await _context.SaveChangesAsync();
                 return Ok();
             }

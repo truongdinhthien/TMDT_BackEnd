@@ -10,7 +10,7 @@ namespace AddressApi.Configuration
 {
     public class TokenConfiguration : ControllerBase, ITokenConfiguration
     {
-        public async Task<User> GetPayloadAsync(string accessToken)
+        public User GetPayloadAsync(string accessToken)
         {
             var token = new JwtSecurityToken(accessToken);
             var sub = token.Claims.FirstOrDefault(m => m.Type == "sub").Value;

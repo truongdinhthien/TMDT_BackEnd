@@ -4,6 +4,7 @@ using BookApi.Core;
 using BookApi.Services;
 using BookApi.Core.Entity;
 using System.Threading.Tasks;
+using System;
 
 namespace BookApi.Controllers
 {
@@ -35,10 +36,11 @@ namespace BookApi.Controllers
             return result;
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateBook (int id,[FromBody] int rate)
+        [HttpPut("rate/{id}")]
+        public async Task<IActionResult> RateBook (int id,[FromBody] int rate)
         {
-            var result = await _bookService.UpdateBookAsync(id, rate);
+            Console.Write($"id : {id} rate : {rate}");
+            var result = await _bookService.RateBookAsync(id, rate);
             return result;
         }
     }

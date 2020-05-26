@@ -46,19 +46,23 @@ namespace BookApi.Core.Entity
             get{return (Rate1 + Rate2 + Rate3 + Rate4 + Rate5 );}
             set{;}
         }
-        public double Rating
+        public double Rating 
         {
             get{
+                Console.WriteLine("First");
                 var rating = (double) (Rate1 * 1 + Rate2 * 2 + Rate3 * 3 + Rate4 * 4 + Rate5 * 5) / (RateCount);
+                Console.WriteLine($"Value 1 : {rating}");
                 rating = Math.Floor(rating * 10) / 10;
+                Console.WriteLine($"Value 2 : {rating}");
+                Console.WriteLine($"Value 2 : {Double.NaN}");
+                if(Double.IsNaN(rating)) return 0;
                 return rating;
             }
             set{;}
         }
         
-
         [Required]
-        public int CategoryId {get;set;}
+        public int? CategoryId {get;set;}
         public Category Category {get;set;}
         [NotMapped]
         [Required]

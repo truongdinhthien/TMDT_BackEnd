@@ -7,6 +7,6 @@ namespace OrderApi.Configuration
 {
     public interface ITokenConfiguration
     {
-        public Task<User> GetPayloadAsync (string accessToken);
+        User GetPayloadAsync (string accessToken);
     }
 }

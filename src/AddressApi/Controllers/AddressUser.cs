@@ -25,17 +25,30 @@ namespace AddressApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAddressByUser()
+        public async Task<IActionResult> GetAddressByUser([FromQuery] bool? IsDefault)
         {
             var addressList = await _context.Addresses.ToListAsync();
 
+
             string access_token = await HttpContext.GetTokenAsync("access_token");
 
-            var user = await _token.GetPayloadAsync(access_token);
+            var user = _token.GetPayloadAsync(access_token);
             
             if (user != null)
             {
                 addressList = addressList.Where(a => a.UserId == user.UserId).ToList();
+            }
+
+            
+            if(IsDefault != null)
+            {
+                addressList = addressList.Where(a => a.IsDefault == IsDefault).ToList();
+            }
+
+            if (addressList.Count() == 1)
+            {
+                var address = addressList.SingleOrDefault();
+                return Ok(new { success = true, data = address});
             }
             return Ok(new { success = true, data = addressList});
         }
@@ -56,7 +69,7 @@ namespace AddressApi.Controllers
 
             string access_token = await HttpContext.GetTokenAsync("access_token");
 
-            var user = await _token.GetPayloadAsync(access_token);
+            var user = _token.GetPayloadAsync(access_token);
             address.UserId = user.UserId;
             addressList = addressList.Where(a => a.UserId == address.UserId).ToList();
 
