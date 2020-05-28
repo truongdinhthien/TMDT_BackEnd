@@ -34,11 +34,17 @@ namespace OrderApi.Controllers
         {
             var orderSource = await _context.Orders.Include(o => o.OrderItems).ToListAsync();
 
+            // var order = orderSource;
             string access_token = await HttpContext.GetTokenAsync("access_token");
 
             var user = _token.GetPayloadAsync(access_token);
 
             var order = orderSource.Where(o => o.BuyerId == user.UserId).ToList();
+
+            if (filter.Status != 0 )
+            {
+                order = order.Where(o => o.Status == filter.Status).ToList();
+            }
 
             var totalAllPrice = 0;
 

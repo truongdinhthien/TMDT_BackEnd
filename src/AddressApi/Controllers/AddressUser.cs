@@ -45,11 +45,11 @@ namespace AddressApi.Controllers
                 addressList = addressList.Where(a => a.IsDefault == IsDefault).ToList();
             }
 
-            if (addressList.Count() == 1)
-            {
-                var address = addressList.SingleOrDefault();
-                return Ok(new { success = true, data = address});
-            }
+            // if (addressList.Count() == 1)
+            // {
+            //     var address = addressList.SingleOrDefault();
+            //     return Ok(new { success = true, data = address});
+            // }
             return Ok(new { success = true, data = addressList});
         }
 

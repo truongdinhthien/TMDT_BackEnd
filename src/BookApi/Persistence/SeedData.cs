@@ -26,6 +26,15 @@ namespace BookApi.Persistence
                 //Add Book
                 for (int i = 1;i<=100;i++)
                 {
+                    int test = new Random().Next(1,4);
+                    string userid = null;
+                    switch (test)
+                    {
+                        case 1 : userid = "0ea7743b-75b8-434a-aaaf-616ac92d186e"; break;
+                        case 2 : userid = "98c958c9-5775-4dba-8366-02ec1b43a27b"; break;
+                        case 3 : userid = "05799a22-8461-4dd1-9d8e-5d0e60dca0c3"; break;
+                        case 4 : userid = "612a078b-8cb1-4468-a5cb-2b94211b5270"; break;
+                    }
                     await context.Books.AddAsync(
                         new Book () {
                             Name = "Book " + i,
@@ -41,7 +50,8 @@ namespace BookApi.Persistence
                             Rate4 = new Random().Next(1,8),
                             Rate5 = new Random().Next(1,15),
                             ImagePaths = {"Images/book1.jpg", "Images/book2.jpg", "Images/book3.jpg", "Images/book4.jpg", "Images/book5.jpg"},
-                            CategoryId = new Random().Next(1,10)
+                            CategoryId = new Random().Next(1,10),
+                            UserId = userid
                     }
                 );
             }

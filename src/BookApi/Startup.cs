@@ -16,6 +16,8 @@ using AutoMapper;
 using BookApi.Persistence;
 using BookApi.Services;
 using BookApi.Core.DTOs;
+using BookApi.Configuration;
+
 namespace BookApi
 {
     public class Startup
@@ -35,19 +37,31 @@ namespace BookApi
             services.AddControllers()
                     .AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-            services.AddCors (options => {
-                options.AddPolicy ("_myAllowSpecificOrigins",
-                    builder => {
-                        builder.WithOrigins (
+
+            services.AddAuthentication("Bearer")
+                    .AddJwtBearer("Bearer", options =>
+                    {
+                        options.Authority = "https://localhost:3117";
+                        options.RequireHttpsMetadata = false;
+                        options.Audience = "book";
+                    });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("_myAllowSpecificOrigins",
+                    builder =>
+                    {
+                        builder.WithOrigins(
                                 "http://localhost:3000",
                                 "http://localhost:3001"
                             )
-                            .AllowAnyHeader ()
-                            .AllowAnyMethod ();
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
                     });
             });
             services.AddScoped<BookService>();
             services.AddScoped<CategoryService>();
+            services.AddScoped<ITokenConfiguration,TokenConfiguration>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,11 +75,13 @@ namespace BookApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            
-            app.UseCors (x => x
-                .AllowAnyOrigin ()
-                .AllowAnyMethod ()
-                .AllowAnyHeader ());
+
+            app.UseCors(x => x
+               .AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader());
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
