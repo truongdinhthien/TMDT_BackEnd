@@ -15,7 +15,8 @@ namespace OrderApi.Models
         public string Fullname {get;set;}
         [Required]
         public string Address {get;set;}
-
+        [Required]
+        public string PhoneNumber {get;set;}
         public int Total {
             get{
                 int temp = 0;

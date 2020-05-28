@@ -74,18 +74,28 @@ namespace OrderApi.Controllers
         {
             if (order.OrderItems.Count() == 0)
                 return BadRequest(new {success = false, message = "OrderItem Is Null"});
-            order.Status = 1;
-            
+
             string access_token = await HttpContext.GetTokenAsync("access_token");
 
             var user = _token.GetPayloadAsync(access_token);
 
-            order.BuyerId = user.UserId;
+            var temp = order.OrderItems;
+
+            var result = temp.GroupBy(t => t.UserId)
+                             .Select(g => new Order() {
+                                 Address = order.Address,
+                                 Fullname = order.Fullname,
+                                 PhoneNumber = order.PhoneNumber,
+                                 BuyerId = user.UserId,
+                                 UserId = g.Key,
+                                 Status = 1,
+                                 OrderItems = g.ToList()
+                             });
             
-            await _context.AddAsync(order);
+            await _context.AddRangeAsync(result);
             await _context.SaveChangesAsync();
 
-            return Ok (new {success = true, data = order});
+            return Ok (new {success = true, data = result});
         }
 
         [HttpDelete("{id}")]

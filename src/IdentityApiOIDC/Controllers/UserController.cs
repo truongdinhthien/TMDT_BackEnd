@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityApiOIDC.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -16,12 +16,13 @@ namespace IdentityApiOIDC.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetByAsync (string id)
         {
             var user = await _userManager.FindByIdAsync(id);
             if (user == null )
                 return NotFound (new {success = false, message = "cant not find"});
+            user.PasswordHash = null;
             return Ok(new {success = true, data = user});
         }
     }

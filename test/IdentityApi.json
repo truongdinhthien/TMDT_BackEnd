@@ -6,64 +6,31 @@
 	},
 	"item": [
 		{
-			"name": "Register",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"Fullname\" : \"ThienTruong\",\n\t\"Phonenumber\" : \"0123456789\",\n\t\"Password\" : \"123456\",\n\t\"Confirmpassword\" : \"123456\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "UserApi",
+			"item": [
+				{
+					"name": "GetUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:3117/api/user/98c958c9-5775-4dba-8366-02ec1b43a27b",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "3117",
+							"path": [
+								"api",
+								"user",
+								"98c958c9-5775-4dba-8366-02ec1b43a27b"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "https://localhost:5000/api/account/register",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"account",
-						"register"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "Login",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"PhoneNumber\" : \"0123456789\",\n\t\"Password\" : \"123456\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "https://localhost:5000/api/account/login",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"account",
-						"login"
-					]
-				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}

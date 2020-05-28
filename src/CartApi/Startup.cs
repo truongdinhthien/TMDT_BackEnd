@@ -14,6 +14,7 @@ using Microsoft.Extensions.Options;
 using StackExchange.Redis;
 using CartApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using CartApi.Configuration;
 
 namespace CartApi
 {
@@ -42,7 +43,7 @@ namespace CartApi
             var database = connectionMultiplexer.GetDatabase(0);
             services.AddScoped<IDatabase>(_ => database);
             services.AddScoped<CartService>();
-            services.AddScoped<UserService>();
+            services.AddScoped<ITokenConfiguration,TokenConfiguration>();
 
             services.AddCors(options =>
             {

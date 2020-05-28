@@ -26,7 +26,9 @@ namespace IdentityApiOIDC
         public void ConfigureServices(IServiceCollection services)
         {
             // uncomment, if you want to add an MVC-based UI
-            services.AddControllersWithViews();
+            services.AddMvc();
+
+            services.AddControllers();
 
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlite("Data Source = AspIdUsers.db"));

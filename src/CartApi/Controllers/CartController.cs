@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using CartApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using CartApi.Configuration;
+using Microsoft.AspNetCore.Authentication;
 
 namespace CartApi.Controllers
 {
@@ -18,11 +20,11 @@ namespace CartApi.Controllers
     public class CartController : ControllerBase
     {
         private CartService _cartService;
-        private UserService _userService;
-        public CartController(CartService cartService, UserService userService)
+        private readonly ITokenConfiguration _token;
+        public CartController(CartService cartService, ITokenConfiguration token)
         {
             _cartService = cartService;
-            _userService = userService;
+            _token = token;
         }
 
         // [HttpGet]
@@ -34,39 +36,53 @@ namespace CartApi.Controllers
         // }
 
 
-        [HttpGet("{key}")]
-        public async Task<ActionResult> GetCart(string key)
+        [HttpGet]
+        public async Task<ActionResult> GetCart()
         {   
+            string access_token = await HttpContext.GetTokenAsync("access_token");
 
-            var data = await _cartService.GetCartAsync(key);
+            var user = _token.GetPayloadAsync(access_token);
+
+            var data = await _cartService.GetCartAsync(user.UserId);
 
             return Ok(new {success = true, data = data});
         }
         [HttpPost]
         public async Task<ActionResult> AddToCart(CartViewModel cartViewModel)
         {
+            string access_token = await HttpContext.GetTokenAsync("access_token");
+
+            var user = _token.GetPayloadAsync(access_token);
+
             var cartItem = new CartItem {
                 Id = cartViewModel.Id,
                 UserId = cartViewModel.UserId,
                 Name = cartViewModel.Name,
+                Slug = cartViewModel.Slug,
                 Price = cartViewModel.Price,
                 Amount = cartViewModel.Amount,
                 ImagePath = cartViewModel.ImagePath
             };
-            await _cartService.AddItemToCart(cartViewModel.buyerId, cartItem);
-            return Ok(new {success = true, data = await _cartService.GetCartAsync(cartViewModel.buyerId)});
+            await _cartService.AddItemToCart(user.UserId, cartItem);
+            return Ok(new {success = true, data = await _cartService.GetCartAsync(user.UserId)});
         }
-        [HttpPut("{key}")]
-        public async Task<ActionResult> PutToCart(string key, [FromBody] CartItem cartItem)
+        [HttpPut]
+        public async Task<ActionResult> PutToCart([FromBody] CartItem cartItem)
         {
-            await _cartService.PutItemToCart(key, cartItem);
-            return Ok(new {success = true, data = await _cartService.GetCartAsync(key)});
+            string access_token = await HttpContext.GetTokenAsync("access_token");
+
+            var user = _token.GetPayloadAsync(access_token);
+            await _cartService.PutItemToCart(user.UserId, cartItem);
+            return Ok(new {success = true, data = await _cartService.GetCartAsync(user.UserId)});
         }
-        [HttpDelete("{key}")]
-        public async Task<ActionResult> DeleteAsync(string key,[FromBody] int id)
+        [HttpDelete]
+        public async Task<ActionResult> DeleteAsync([FromBody] int id)
         {
-            await _cartService.DeleteCartItemAsync(key,id);
-            return Ok(new {success = true, data = await _cartService.GetCartAsync(key)});
+            string access_token = await HttpContext.GetTokenAsync("access_token");
+
+            var user = _token.GetPayloadAsync(access_token);
+            await _cartService.DeleteCartItemAsync(user.UserId,id);
+            return Ok(new {success = true, data = await _cartService.GetCartAsync(user.UserId)});
         }
 
     }
