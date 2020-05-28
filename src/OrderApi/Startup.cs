@@ -32,6 +32,20 @@ namespace OrderApi
                     .AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("_myAllowSpecificOrigins",
+                    builder =>
+                    {
+                        builder.WithOrigins(
+                                "http://localhost:3000",
+                                "http://localhost:3001"
+                            )
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
+
             services.AddAuthentication("Bearer")
                     .AddJwtBearer("Bearer", options =>
                     {
@@ -55,6 +69,11 @@ namespace OrderApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(x => x
+               .AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader());
 
             app.UseAuthentication();
 
