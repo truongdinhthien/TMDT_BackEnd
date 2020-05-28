@@ -9,6 +9,8 @@ namespace OrderApi.Models
         [Range(1,int.MaxValue)]  
         public int? BookId {get;set;}
         [Required]
+        public string UserId {get;set;}
+        [Required]
         public string BookName {get;set;}
         [Required]
         [Range(1,int.MaxValue)]

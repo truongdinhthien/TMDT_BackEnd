@@ -75,6 +75,7 @@ namespace OrderApi.Controllers
             if (order.OrderItems.Count() == 0)
                 return BadRequest(new {success = false, message = "OrderItem Is Null"});
             order.Status = 1;
+            
             string access_token = await HttpContext.GetTokenAsync("access_token");
 
             var user = _token.GetPayloadAsync(access_token);
