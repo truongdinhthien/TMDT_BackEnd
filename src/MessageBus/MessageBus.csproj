@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+      <PackageReference Include="Masstransit" Version="6.3.2" />
+    <PackageReference Include="Masstransit.AspNetCore" Version="6.3.2" />
+    <PackageReference Include="Masstransit.RabbitMQ" Version="6.3.2" />
+  </ItemGroup>
+</Project>

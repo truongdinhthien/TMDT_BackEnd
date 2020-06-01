@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace GateWayApi
+namespace CommentApi
 {
     public class Program
     {
@@ -18,11 +18,8 @@ namespace GateWayApi
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((host,config) => {
-                    config.AddJsonFile("oceclot.json");
-                })
                 .ConfigureWebHostDefaults(webBuilder =>
-                {   
+                {
                     webBuilder.UseStartup<Startup>();
                 });
     }

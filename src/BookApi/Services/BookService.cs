@@ -36,6 +36,12 @@ namespace BookApi.Services
             var booksSoruce = await _context.Books.Include(b => b.Category).ToListAsync();
             var books = _mapper.Map<IEnumerable<Book>, IEnumerable<BookDTO>>(booksSoruce);
 
+            //Fill by UserId
+            if(fillterBook.UserId != "")
+            {
+                books = books.Where(b => b.UserId == fillterBook.UserId).ToList();
+            }
+
             //Fill by Category
             if (fillterBook.CategoryId != -1)
             {
