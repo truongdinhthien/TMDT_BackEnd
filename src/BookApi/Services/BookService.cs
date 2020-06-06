@@ -154,6 +154,20 @@ namespace BookApi.Services
             }
             return BadRequest(new { success = false, message = "Cant not find id"});
         }
+
+        public async Task<IActionResult> PutBookAsync(int id, Book book)
+        {
+            var bookResource = await _context.Books.FirstOrDefaultAsync(b => b.BookId == id);
+
+            if(bookResource != null)
+            {
+                bookResource.Content = book.Content;
+                await _context.SaveChangesAsync();
+            }
+
+            
+            return Ok();
+        }
         public List<String> convertImageToPath(List<IFormFile> file)
         {
             var ImagePaths = new List<string>();

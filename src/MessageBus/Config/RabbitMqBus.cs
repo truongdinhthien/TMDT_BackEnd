@@ -7,7 +7,7 @@ namespace MessageBus.Config
     public class RabbitMqBus
     {
         [Obsolete]
-        public static IBusControl ConfigureBus(IServiceProvider provider, Action<IRabbitMqBusFactoryConfigurator, IRabbitMqHost>
+        public static IBusControl ConfigureBus(IRegistrationContext<IServiceProvider> provider, Action<IRabbitMqBusFactoryConfigurator, IRabbitMqHost>
          registrationAction = null)
         {
             return Bus.Factory.CreateUsingRabbitMq(cfg =>

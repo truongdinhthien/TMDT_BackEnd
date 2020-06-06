@@ -11,7 +11,11 @@ namespace OrderApi.Models
         [Required]
         public string UserId {get;set;}
         [Required]
+        public string FullName {get;set;}
+        [Required]
         public string BookName {get;set;}
+        [Required]
+        public string Slug {get;set;}
         [Required]
         [Range(1,int.MaxValue)]
         public int BookPrice {get;set;}

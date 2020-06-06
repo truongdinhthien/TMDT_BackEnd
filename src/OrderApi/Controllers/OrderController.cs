@@ -15,7 +15,7 @@ namespace OrderApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    // [Authorize]
 
     public class OrderController : ControllerBase
     {
@@ -40,6 +40,34 @@ namespace OrderApi.Controllers
             var user = _token.GetPayloadAsync(access_token);
 
             var order = orderSource.Where(o => o.BuyerId == user.UserId).ToList();
+
+            if (filter.Status != 0 )
+            {
+                order = order.Where(o => o.Status == filter.Status).ToList();
+            }
+
+            var totalAllPrice = 0;
+
+            foreach (var item in order)
+            {
+                if(item.Status != 4)
+                    totalAllPrice += item.Total;
+            }
+        
+            return Ok (new {success = true,filter = filter, data = order, totalAllPrice = totalAllPrice});
+        }
+
+        [HttpGet("/shop/{userId}")]
+        public async Task<IActionResult> GetOrderUser (string userId,[FromQuery] OrderFilter filter)
+        {
+            var orderSource = await _context.Orders.Include(o => o.OrderItems).ToListAsync();
+
+            // var order = orderSource;
+            // string access_token = await HttpContext.GetTokenAsync("access_token");
+
+            // var user = _token.GetPayloadAsync(access_token);
+
+            var order = orderSource.Where(o => o.UserId == userId).ToList();
 
             if (filter.Status != 0 )
             {

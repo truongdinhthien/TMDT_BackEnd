@@ -56,5 +56,16 @@ namespace BookApi.Controllers
             var result = await _bookService.RateBookAsync(id, rate);
             return result;
         }
+
+        [HttpPut("{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> PutBook (int id, [FromForm] Book book)
+        {
+            // string access_token = await HttpContext.GetTokenAsync("access_token");
+            // var user = _token.GetPayloadAsync(access_token);
+
+            var result = await _bookService.PutBookAsync(id, book);
+            return Ok ();
+        }
     }
 }

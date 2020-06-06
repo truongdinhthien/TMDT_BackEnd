@@ -13,6 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using OrderApi.Configuration;
 using OrderApi.Data;
+using MassTransit;
+using MessageBus.Config;
 
 namespace OrderApi
 {
@@ -31,6 +33,13 @@ namespace OrderApi
             services.AddControllers()
                     .AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            services.AddMassTransit(cfg =>
+            {
+                cfg.AddBus(provider => RabbitMqBus.ConfigureBus(provider));
+            });
+
+            services.AddMassTransitHostedService();
 
             services.AddCors(options =>
             {

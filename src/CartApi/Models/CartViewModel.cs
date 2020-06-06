@@ -9,6 +9,8 @@ namespace CartApi.Models
         [Required]
         public string UserId {get;set;}
         [Required]
+        public string FullName {get;set;}
+        [Required]
         public string Name {get;set;}
         [Required]
         public string Slug {get;set;}

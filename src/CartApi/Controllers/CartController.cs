@@ -57,6 +57,7 @@ namespace CartApi.Controllers
             var cartItem = new CartItem {
                 Id = cartViewModel.Id,
                 UserId = cartViewModel.UserId,
+                FullName = cartViewModel.FullName,
                 Name = cartViewModel.Name,
                 Slug = cartViewModel.Slug,
                 Price = cartViewModel.Price,
