@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CommentApi.Consumer;
 using CommentApi.Data;
+using MassTransit;
+using MessageBus.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +31,23 @@ namespace CommentApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddScoped<CommentConsumer>();
+
+            services.AddMassTransit(cfg =>
+            {
+                cfg.AddConsumer<CommentConsumer>();
+
+                cfg.AddBus(provider => RabbitMqBus.ConfigureBus(provider, (cfg, host) =>
+                {
+                    cfg.ReceiveEndpoint(BusConstant.CommentQueue, ep =>
+                    {
+                        ep.ConfigureConsumer<CommentConsumer>(provider);
+                    });
+                }));
+            });
+
+            services.AddMassTransitHostedService();
 
             services.AddDbContext<CommentContext>(options => options.UseSqlite("DataSource = Comment.db"));
 

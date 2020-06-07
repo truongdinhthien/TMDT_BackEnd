@@ -162,6 +162,11 @@ namespace BookApi.Services
             if(bookResource != null)
             {
                 bookResource.Content = book.Content;
+                bookResource.Name = book.Name;
+                bookResource.Author = book.Author;
+                bookResource.CategoryId = book.CategoryId;
+                bookResource.Publisher = book.Publisher;
+                bookResource.Slug = book.Slug;
                 await _context.SaveChangesAsync();
             }
 

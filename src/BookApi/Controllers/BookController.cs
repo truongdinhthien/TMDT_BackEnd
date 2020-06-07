@@ -44,6 +44,7 @@ namespace BookApi.Controllers
             var user = _token.GetPayloadAsync(access_token);
 
             book.UserId = user.UserId;
+            book.FullName = user.Fullname;
             var result = await _bookService.PostBookAsync(book);
             
             return result;

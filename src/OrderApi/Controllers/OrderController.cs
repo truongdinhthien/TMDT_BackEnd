@@ -15,7 +15,7 @@ namespace OrderApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    // [Authorize]
+    [Authorize]
 
     public class OrderController : ControllerBase
     {
@@ -26,8 +26,6 @@ namespace OrderApi.Controllers
             _context = context;
             _token = token;
         }
-
-        
 
         [HttpGet]
         public async Task<IActionResult> GetOrder ([FromQuery] OrderFilter filter)

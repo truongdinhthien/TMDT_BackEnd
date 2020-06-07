@@ -24,7 +24,7 @@ namespace OrderApi.Models
         public int Amount {get;set;}
         [Required]
         public string Image {get;set;}
-
+        public bool isRate {get;set;} = false;
         public int OrderId {get;set;}
         public Order Order {get;set;}
     }

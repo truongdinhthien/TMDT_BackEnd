@@ -26,7 +26,8 @@ namespace BookApi.Core.DTOs
         public string Publisher {get;set;}
         public int? Amount {get;set;}
 
-        public string UserId {get;set;}
+         public string UserId {get;set;}
+        public string FullName {get;set;}
         public CategoryDTO Category {get;set;}
     }
 }

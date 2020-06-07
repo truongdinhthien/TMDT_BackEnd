@@ -66,6 +66,7 @@ namespace BookApi.Core.Entity
         public Category Category {get;set;}
 
         public string UserId {get;set;}
+        public string FullName {get;set;}
         [NotMapped]
         [Required]
         public List<IFormFile> Images {get;set;}
