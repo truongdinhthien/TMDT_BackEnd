@@ -55,7 +55,7 @@ namespace OrderApi.Controllers
             return Ok (new {success = true,filter = filter, data = order, totalAllPrice = totalAllPrice});
         }
 
-        [HttpGet("/shop/{userId}")]
+        [HttpGet("shop/{userId}")]
         public async Task<IActionResult> GetOrderUser (string userId,[FromQuery] OrderFilter filter)
         {
             var orderSource = await _context.Orders.Include(o => o.OrderItems).ToListAsync();
@@ -127,15 +127,34 @@ namespace OrderApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrder (int id)
         {
-            var orderItem = await _context.Orders.Include(o => o.OrderItems).Where(o => o.OrderId == id).SingleOrDefaultAsync();
-             if(orderItem != null)
+            var order = await _context.Orders.Where(o => o.OrderId == id).SingleOrDefaultAsync();
+            if(order != null)
             {
-                orderItem.Status = 4;
+                order.Status = 4;
                 await _context.SaveChangesAsync();
-                return Ok (new {success = true, data = orderItem});
+                return Ok (new {success = true, data = order});
             }
                 return NotFound (new {success = false, message = "Order item is not found"});
         }
         
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutOrder (int id, int status)
+        {
+            var order = await _context.Orders.Where(o => o.OrderId == id).SingleOrDefaultAsync();
+
+            if(order != null)
+            {
+                if(order.Status - status != 1)
+                {
+                    order.Status = status;
+                    await _context.SaveChangesAsync();
+                    return Ok (new {success = true, data = order});
+                }
+
+                if(status > 3 || status < 1) return BadRequest(new {success = false , message = "Status range is 1 to 3"});
+                return BadRequest(new {sucess = false, message = "Error"});
+            }
+            return NotFound (new {success = false, message = "Order item is not found"});
+        }
     }
 }

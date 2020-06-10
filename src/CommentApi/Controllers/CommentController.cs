@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CommentApi.Data;
 using CommentApi.Filter;
+using CommentApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +18,7 @@ namespace CommentApi.Controllers
             _context = context;
         }
         [HttpGet]
-        public async Task<IActionResult> GetComment ([FromQuery] CommentFilter filter)
+        public async Task<IActionResult> GetComment ([FromQuery] CommentFilter filter, [FromQuery] Pagination pagination)
         {
             var comment = await _context.Comments.ToListAsync();
 
@@ -25,6 +26,8 @@ namespace CommentApi.Controllers
             {
                 comment = comment.Where(c => c.BookId == filter.BookId).ToList();
             }
+
+            var result = PaginatedList<Comment>.Create(comment, pagination.current, pagination.pageSize);
 
             return Ok(new {success = true, data = comment, filter = filter});
         }

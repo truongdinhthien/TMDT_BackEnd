@@ -30,12 +30,18 @@ namespace OrderApi.Controllers
         {
             var orderItem = _context.OrderItems.Where(o => o.OrderItemId == vm.OrderItemId).SingleOrDefault();
 
+
+
             if (orderItem == null)
             {
                 return NotFound(new { success = false, message = "Not Found" });
             }
             else
             {
+                if(orderItem.Order.Status != 3)
+                {
+                    return BadRequest(new {success = false, message = "You cant not rate this item when order is not done"});
+                }
                 if (orderItem.isRate == true)
                 {
                     return BadRequest(new { success = false, message = "This item has rated" });
@@ -56,7 +62,19 @@ namespace OrderApi.Controllers
                         CreatedDate = new DateTime()
                     });
 
-                    return Ok();
+                    var endPoint1 = await _sendEndpointProvider.
+                                    GetSendEndpoint(new Uri("queue:" + BusConstant.RateQueue));
+                    
+                    await endPoint1.Send<RatingMessage>(new {
+                        BookId = vm.BookId,
+                        Rating = vm.Rating
+                    });
+
+                    orderItem.isRate = true;
+
+                    await _context.SaveChangesAsync();
+
+                    return Ok(new {success = true, message = "Rating success"});
                 }
             }
         }

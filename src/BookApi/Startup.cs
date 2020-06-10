@@ -17,6 +17,9 @@ using BookApi.Persistence;
 using BookApi.Services;
 using BookApi.Core.DTOs;
 using BookApi.Configuration;
+using MassTransit;
+using BookApi.Consumer;
+using MessageBus.Config;
 
 namespace BookApi
 {
@@ -37,6 +40,23 @@ namespace BookApi
             services.AddControllers()
                     .AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            services.AddScoped<RatingConsumer>();
+
+            services.AddMassTransit(cfg =>
+            {
+                cfg.AddConsumer<RatingConsumer>();
+
+                cfg.AddBus(provider => RabbitMqBus.ConfigureBus(provider, (cfg, host) =>
+                {
+                    cfg.ReceiveEndpoint(BusConstant.RateQueue, ep =>
+                    {
+                        ep.ConfigureConsumer<RatingConsumer>(provider);
+                    });
+                }));
+            });
+
+            services.AddMassTransitHostedService();
 
             services.AddAuthentication("Bearer")
                     .AddJwtBearer("Bearer", options =>
