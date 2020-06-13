@@ -16,7 +16,7 @@ namespace OrderApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    // [Authorize]
 
     public class OrderController : ControllerBase
     {
@@ -144,7 +144,7 @@ namespace OrderApi.Controllers
             var order = await _context.Orders.Where(o => o.OrderId == id).SingleOrDefaultAsync();
             if(order != null)
             {
-                if(status - order.Status != 1)
+                if(status - order.Status == 1)
                 {
                     order.Status = status;
                     await _context.SaveChangesAsync();
