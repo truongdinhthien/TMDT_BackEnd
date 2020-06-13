@@ -16,7 +16,7 @@ namespace OrderApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    // [Authorize]
 
     public class OrderController : ControllerBase
     {
@@ -139,7 +139,7 @@ namespace OrderApi.Controllers
         }
         
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutOrder (int id, [Range(1,3)] int status)
+        public async Task<IActionResult> PutOrder (int id, [FromBody][Range(1,3)] int status)
         {
             var order = await _context.Orders.Where(o => o.OrderId == id).SingleOrDefaultAsync();
             if(order != null)
