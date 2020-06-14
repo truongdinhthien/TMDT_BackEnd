@@ -5,6 +5,7 @@ using MassTransit;
 using MessageBus.Config;
 using MessageBus.Message;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OrderApi.Configuration;
 using OrderApi.Data;
 using OrderApi.ViewModels;
@@ -28,7 +29,7 @@ namespace OrderApi.Controllers
         [HttpPost]
         public async Task<IActionResult> AddRate([FromBody] RatingViewModel vm)
         {
-            var orderItem = _context.OrderItems.Where(o => o.OrderItemId == vm.OrderItemId).SingleOrDefault();
+            var orderItem = _context.OrderItems.Include(o => o.Order).Where(o => o.OrderItemId == vm.OrderItemId).SingleOrDefault();
 
 
 

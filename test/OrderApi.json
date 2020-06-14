@@ -83,19 +83,12 @@
 			"name": "GetOrder",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6Ik93R0FTaVVNamUzbnBteXFsMXNTOUEiLCJ0eXAiOiJhdCtqd3QifQ.eyJuYmYiOjE1OTE1MzU2MzUsImV4cCI6MTU5MTUzOTIzNSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6MzExNyIsImF1ZCI6ImJvb2siLCJjbGllbnRfaWQiOiJjbGllbnQiLCJzdWIiOiIwNTc5OWEyMi04NDYxLTRkZDEtOWQ4ZS01ZDBlNjBkY2EwYzMiLCJhdXRoX3RpbWUiOjE1OTE1MzU2MzEsImlkcCI6ImxvY2FsIiwiRnVsbG5hbWUiOiJUaGllblRydW9uZyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkN1c3RvbWVyIiwiUm9sZSI6IkN1c3RvbWVyIiwic2NvcGUiOlsib3BlbmlkIiwicHJvZmlsZSIsImJvb2siXSwiYW1yIjpbInB3ZCJdfQ.ooczQejhjtSyYwknKcPdgwlkbXK_lDlN2VgmOVSe_NRRYTNeRq5aoLUZbA04E3mcpcXBn5Yvo-GGAEa2-QM_c4Wg6hXlRXG6_btov3nGqAyfBIUn9wF5nixlfUpi68jDwiAcT2_1Nts4p-FqVtp8B-xN6ThYRTkzQ1uLOXZfQxq5Aie3UfIXQCX5ddt82XX3C8mVzZAcu8MHEcEY2otYXI4vIeqsGFs4DSihm99M_9xAeRS11eDUDLfQJwh35V5xKwfVLwpxP3exJ7iVelWBCBLokdjdUGaJYEHPCd9dLkbyg-NBWTmgpv_MEc19zfBetKOXj-vvMTXGLv6WnyI84Q",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:5004/api/order",
+					"raw": "https://localhost:5004/api/order/1",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -103,7 +96,8 @@
 					"port": "5004",
 					"path": [
 						"api",
-						"order"
+						"order",
+						"1"
 					]
 				}
 			},
@@ -147,7 +141,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "1",
+					"raw": "3",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -166,6 +160,17 @@
 						"order",
 						"1"
 					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
 				}
 			},
 			"response": []
