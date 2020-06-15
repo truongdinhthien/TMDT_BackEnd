@@ -18,7 +18,7 @@ namespace OrderApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    // [Authorize]
+    [Authorize]
 
     public class OrderController : ControllerBase
     {
@@ -101,22 +101,6 @@ namespace OrderApi.Controllers
         [HttpPost]
         public async Task<IActionResult> AddOrder([FromBody] Models.Order order)
         {
-            StripeConfiguration.ApiKey = "sk_test_DMFHsAZpG7JjAgLSAaWxCEE800SyfwhfoA";
-
-            var options = new PaymentIntentCreateOptions
-            {
-                Amount = 1099,
-                Currency = "đ",
-                // Verify your integration in this guide by including this parameter
-                Metadata = new Dictionary<string, string>
-                {
-                    { "integration_check", "accept_a_payment" },
-                },
-            };
-
-            var service = new PaymentIntentService();
-            var paymentIntent = service.Create(options);
-
             if (order.OrderItems.Count() == 0)
                 return BadRequest(new { success = false, message = "OrderItem Is Null" });
 
