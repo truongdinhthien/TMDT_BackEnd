@@ -1,9 +1,13 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using MassTransit;
+using MessageBus.Config;
+using MessageBus.Message;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,12 +26,14 @@ namespace OrderApi.Controllers
 
     public class OrderController : ControllerBase
     {
+        private readonly ISendEndpointProvider _sendEndpointProvider;
         private readonly OrderContext _context;
         private readonly ITokenConfiguration _token;
-        public OrderController(OrderContext context, ITokenConfiguration token)
+        public OrderController(ISendEndpointProvider sendEndpointProvider, OrderContext context, ITokenConfiguration token)
         {
-            _context = context;
+            _sendEndpointProvider = sendEndpointProvider;
             _token = token;
+            _context = context;
         }
 
         [HttpGet]
@@ -125,6 +131,19 @@ namespace OrderApi.Controllers
             await _context.AddRangeAsync(result);
             await _context.SaveChangesAsync();
 
+            var endPoint = await _sendEndpointProvider.
+                                    GetSendEndpoint(new Uri("queue:" + BusConstant.AddAmountQueue));
+
+            foreach (var item in temp)
+            {
+                await endPoint.Send<AddAmountMessage>(new
+                {
+                    BookId = item.BookId,
+                    Amount = item.Amount,
+                    isAdd = true
+                });
+            };
+
             return Ok(new { success = true, data = result });
         }
 
@@ -147,18 +166,33 @@ namespace OrderApi.Controllers
             var service = new PaymentIntentService();
             var paymentIntent = service.Create(options);
 
-            return Ok (new {scuccess = true, message = "Success", paymentIntent = paymentIntent});
+            return Ok(new { scuccess = true, message = "Success", paymentIntent = paymentIntent });
         }
 
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrder(int id)
         {
-            var order = await _context.Orders.Where(o => o.OrderId == id).SingleOrDefaultAsync();
+            var order = await _context.Orders.Include(o => o.OrderItems).Where(o => o.OrderId == id).SingleOrDefaultAsync();
             if (order != null)
             {
+                if(order.Status != 1)
+                    return BadRequest(new { success = false, message = "Order item đã xử lý k thể xóa" });
                 order.Status = 4;
                 await _context.SaveChangesAsync();
+
+                var endPoint = await _sendEndpointProvider.
+                                    GetSendEndpoint(new Uri("queue:" + BusConstant.AddAmountQueue));
+
+                foreach (var item in order.OrderItems)
+                {
+                    await endPoint.Send<AddAmountMessage>(new
+                    {
+                        BookId = item.BookId,
+                        Amount = item.Amount,
+                        isAdd = false
+                    });
+                };
                 return Ok(new { success = true, data = order });
             }
             return NotFound(new { success = false, message = "Order item is not found" });

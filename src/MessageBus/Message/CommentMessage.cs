@@ -6,6 +6,7 @@ namespace MessageBus.Message
     {
         public int CommentId {get;set;}
         public string BuyerId {get;set;}
+        public string FullName {get;set;}
         public string UserId {get;set;}
         public int BookId {get;set;}
         public int Rating {get;set;}

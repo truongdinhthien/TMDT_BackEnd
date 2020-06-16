@@ -10,7 +10,7 @@ namespace OrderApi.Data
 
         }
 
-        public DbSet<Order> Orders {get;set;}
+        public DbSet<Models.Order> Orders {get;set;}
         public DbSet<OrderItem> OrderItems {get;set;}
     }
 }

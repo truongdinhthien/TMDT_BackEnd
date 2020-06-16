@@ -25,11 +25,12 @@ namespace CommentApi.Consumer
             var comment = new Comment() {
                 CommentId = data.CommentId,
                 BuyerId = data.BuyerId,
+                FullName = data.FullName,
                 UserId = data.UserId,
                 BookId = data.BookId,
                 Rating = data.Rating,
                 Content = data.Content,
-                CreatedDate = new DateTime()
+                CreatedDate = data.CreatedDate
             };
             await _context.AddAsync(comment);
             await _context.SaveChangesAsync();

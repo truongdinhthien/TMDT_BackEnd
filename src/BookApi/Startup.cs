@@ -42,16 +42,23 @@ namespace BookApi
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddScoped<RatingConsumer>();
+            services.AddScoped<AddAmountConsumer>();
 
             services.AddMassTransit(cfg =>
             {
                 cfg.AddConsumer<RatingConsumer>();
+                cfg.AddConsumer<AddAmountConsumer>();
 
                 cfg.AddBus(provider => RabbitMqBus.ConfigureBus(provider, (cfg, host) =>
                 {
                     cfg.ReceiveEndpoint(BusConstant.RateQueue, ep =>
                     {
                         ep.ConfigureConsumer<RatingConsumer>(provider);
+                    });
+
+                    cfg.ReceiveEndpoint(BusConstant.AddAmountQueue, ep =>
+                    {
+                        ep.ConfigureConsumer<AddAmountConsumer>(provider);
                     });
                 }));
             });

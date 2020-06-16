@@ -56,11 +56,12 @@ namespace OrderApi.Controllers
                     {
                         CommentId = vm.CommentId,
                         BuyerId = vm.BuyerId,
+                        FullName = vm.FullName,
                         UserId = vm.UserId,
                         BookId = vm.BookId,
                         Rating = vm.Rating,
                         Content = vm.Content,
-                        CreatedDate = new DateTime()
+                        CreatedDate = DateTime.UtcNow
                     });
 
                     var endPoint1 = await _sendEndpointProvider.

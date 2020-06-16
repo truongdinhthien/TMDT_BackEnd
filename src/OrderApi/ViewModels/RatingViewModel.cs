@@ -11,6 +11,8 @@ namespace OrderApi.ViewModels
         [Required]
         public string BuyerId {get;set;}
         [Required]
+        public string FullName {get;set;}
+        [Required]
         public string UserId {get;set;}
         [Required]
         public int? BookId {get;set;}
