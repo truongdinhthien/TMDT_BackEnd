@@ -58,7 +58,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6Ik93R0FTaVVNamUzbnBteXFsMXNTOUEiLCJ0eXAiOiJhdCtqd3QifQ.eyJuYmYiOjE1OTIzMjIwODIsImV4cCI6MTU5MjMyNTY4MiwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6MzExNyIsImF1ZCI6ImJvb2siLCJjbGllbnRfaWQiOiJjbGllbnQiLCJzdWIiOiIwNTc5OWEyMi04NDYxLTRkZDEtOWQ4ZS01ZDBlNjBkY2EwYzMiLCJhdXRoX3RpbWUiOjE1OTIzMjIwNzUsImlkcCI6ImxvY2FsIiwiRnVsbG5hbWUiOiJUaGllblRydW9uZyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkN1c3RvbWVyIiwiUm9sZSI6IkN1c3RvbWVyIiwic2NvcGUiOlsib3BlbmlkIiwicHJvZmlsZSIsImJvb2siXSwiYW1yIjpbInB3ZCJdfQ.bqARqsY5RBfA97rpucXDsyik3LNym-eMranCSTIqw9rM8hT3rd2jFlzTuJOJLTeL8Oq9YNcSlkGeeymCkxQz7WA4OCOW6B8fhyJ4B3OZxl3we9x2_zqLip178z3U2pCf5KeatMxKpI6jpal_x_YwoJRtHklHPutRfJJWU5E6ZKLVZrl95kChLMhkRUQP7975fgTpz5ot7bpOEaP54-ebT_Cb6eCm4J7ozwLD0fjzB6lM6ngQhNmwqEzy9v1G00zVszvuWM7NrGzXlVBw-XTstJKfWSmYWBhbijtSJXUQrwgCz9DayFfJFz4hQK2VJSbvx1q_SlaDBG71s0ctnY09yA",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6Ik93R0FTaVVNamUzbnBteXFsMXNTOUEiLCJ0eXAiOiJhdCtqd3QifQ.eyJuYmYiOjE1OTI0MDM1NTgsImV4cCI6MTU5MjQwNzE1OCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6MzExNyIsImF1ZCI6ImJvb2siLCJjbGllbnRfaWQiOiJjbGllbnQiLCJzdWIiOiIwNTc5OWEyMi04NDYxLTRkZDEtOWQ4ZS01ZDBlNjBkY2EwYzMiLCJhdXRoX3RpbWUiOjE1OTI0MDM1NTYsImlkcCI6ImxvY2FsIiwiRnVsbG5hbWUiOiJUaGllblRydW9uZyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkN1c3RvbWVyIiwiUm9sZSI6IkN1c3RvbWVyIiwic2NvcGUiOlsib3BlbmlkIiwicHJvZmlsZSIsImJvb2siXSwiYW1yIjpbInB3ZCJdfQ.QzEBzEEbMZW6lVStJShoemw53RfR6bKwnu-2GzkWnkau-74HtTK0f3oFIdS4_6H8L1xGzE5lAy5ClV5qMfrK0yG9C8yPunlduhCmY_LrGU6KXjEsJCieINiKKh_PpEOr_Q0cp4VkSii52Non8uUrxN0i2LooHNEDCEkM4adsu-2zBLrHt4lxKD-vf_UUadxk2fDqErjDWAxn5AMOWABY20nZsdzvDw8NQOLCjlb-SIav6OtMZchoXKKWgZQ7On3b0EYuazNUvthRN5yycmqM4joNRMsgOKxC4N4kv04iHSaCD1grINwPicribUwt5rGBD9smnxLVgDHOa3uyqNGWQQ",
 							"type": "string"
 						}
 					]
@@ -67,7 +67,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"Address\" : \"Địa chỉ của lập trình viên 1\",\n\t\"PhoneNumber\" : \"0123456987\",\n\t\"Fullname\" : \"Lập trình viên 1\",\n\t\"OrderItems\" : [\n\t\t{\n\t\t\t\"Image\" : \"Link url1\",\n\t\t\t\"UserId\" : \"User bán 1\",\n\t\t\t\"FullName\" : \"Người bán 1\",\n\t\t\t\"Amount\" : 2,\n\t\t\t\"BookId\" : \"10\",\n\t\t\t\"BookName\" : \"Sách 10\",\n\t\t\t\"Slug\" : \"sach-10\",\n\t\t\t\"BookPrice\" : 15000\n\t\t},\n\t\t{\n\t\t\t\"Image\" : \"Link url\",\n\t\t\t\"UserId\" : \"User bán 1\",\n\t\t\t\"FullName\" : \"Người bán 1\",\n\t\t\t\"Amount\" : 3,\n\t\t\t\"BookId\" : \"11\",\n\t\t\t\"BookName\" : \"Sách 11\",\n\t\t\t\"Slug\" : \"sach-11\",\n\t\t\t\"BookPrice\" : 10000\n\t\t}\n\t\t,\n\t\t{\n\t\t\t\"Image\" : \"Link url\",\n\t\t\t\"UserId\" : \"User bán 2\",\n\t\t\t\"FullName\" : \"Người bán 2\",\n\t\t\t\"Amount\" : 2,\n\t\t\t\"BookId\" : \"12\",\n\t\t\t\"BookName\" : \"Sách 12\",\n\t\t\t\"Slug\" : \"sach-12\",\n\t\t\t\"BookPrice\" : 12000\n\t\t}\n\t]\n}",
+					"raw": "{\n\t\"Address\" : \"Địa chỉ của lập trình viên 1\",\n\t\"PhoneNumber\" : \"0123456987\",\n\t\"Fullname\" : \"Lập trình viên 1\",\n\t\"PaymentIntent\" : \"pi_1GuIEqI9AKrJY6DCkie7sdrp\",\n\t\"OrderItems\" : [\n\t\t{\n\t\t\t\"Image\" : \"Link url1\",\n\t\t\t\"UserId\" : \"User bán 1\",\n\t\t\t\"FullName\" : \"Người bán 1\",\n\t\t\t\"Amount\" : 2,\n\t\t\t\"BookId\" : \"10\",\n\t\t\t\"BookName\" : \"Sách 10\",\n\t\t\t\"Slug\" : \"sach-10\",\n\t\t\t\"BookPrice\" : 15000\n\t\t},\n\t\t{\n\t\t\t\"Image\" : \"Link url\",\n\t\t\t\"UserId\" : \"User bán 1\",\n\t\t\t\"FullName\" : \"Người bán 1\",\n\t\t\t\"Amount\" : 3,\n\t\t\t\"BookId\" : \"11\",\n\t\t\t\"BookName\" : \"Sách 11\",\n\t\t\t\"Slug\" : \"sach-11\",\n\t\t\t\"BookPrice\" : 10000\n\t\t}\n\t\t,\n\t\t{\n\t\t\t\"Image\" : \"Link url\",\n\t\t\t\"UserId\" : \"User bán 2\",\n\t\t\t\"FullName\" : \"Người bán 2\",\n\t\t\t\"Amount\" : 2,\n\t\t\t\"BookId\" : \"12\",\n\t\t\t\"BookName\" : \"Sách 12\",\n\t\t\t\"Slug\" : \"sach-12\",\n\t\t\t\"BookPrice\" : 12000\n\t\t}\n\t]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -97,7 +97,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6Ik93R0FTaVVNamUzbnBteXFsMXNTOUEiLCJ0eXAiOiJhdCtqd3QifQ.eyJuYmYiOjE1OTIzMjIwODIsImV4cCI6MTU5MjMyNTY4MiwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6MzExNyIsImF1ZCI6ImJvb2siLCJjbGllbnRfaWQiOiJjbGllbnQiLCJzdWIiOiIwNTc5OWEyMi04NDYxLTRkZDEtOWQ4ZS01ZDBlNjBkY2EwYzMiLCJhdXRoX3RpbWUiOjE1OTIzMjIwNzUsImlkcCI6ImxvY2FsIiwiRnVsbG5hbWUiOiJUaGllblRydW9uZyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkN1c3RvbWVyIiwiUm9sZSI6IkN1c3RvbWVyIiwic2NvcGUiOlsib3BlbmlkIiwicHJvZmlsZSIsImJvb2siXSwiYW1yIjpbInB3ZCJdfQ.bqARqsY5RBfA97rpucXDsyik3LNym-eMranCSTIqw9rM8hT3rd2jFlzTuJOJLTeL8Oq9YNcSlkGeeymCkxQz7WA4OCOW6B8fhyJ4B3OZxl3we9x2_zqLip178z3U2pCf5KeatMxKpI6jpal_x_YwoJRtHklHPutRfJJWU5E6ZKLVZrl95kChLMhkRUQP7975fgTpz5ot7bpOEaP54-ebT_Cb6eCm4J7ozwLD0fjzB6lM6ngQhNmwqEzy9v1G00zVszvuWM7NrGzXlVBw-XTstJKfWSmYWBhbijtSJXUQrwgCz9DayFfJFz4hQK2VJSbvx1q_SlaDBG71s0ctnY09yA",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6Ik93R0FTaVVNamUzbnBteXFsMXNTOUEiLCJ0eXAiOiJhdCtqd3QifQ.eyJuYmYiOjE1OTI0MDM1NTgsImV4cCI6MTU5MjQwNzE1OCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6MzExNyIsImF1ZCI6ImJvb2siLCJjbGllbnRfaWQiOiJjbGllbnQiLCJzdWIiOiIwNTc5OWEyMi04NDYxLTRkZDEtOWQ4ZS01ZDBlNjBkY2EwYzMiLCJhdXRoX3RpbWUiOjE1OTI0MDM1NTYsImlkcCI6ImxvY2FsIiwiRnVsbG5hbWUiOiJUaGllblRydW9uZyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkN1c3RvbWVyIiwiUm9sZSI6IkN1c3RvbWVyIiwic2NvcGUiOlsib3BlbmlkIiwicHJvZmlsZSIsImJvb2siXSwiYW1yIjpbInB3ZCJdfQ.QzEBzEEbMZW6lVStJShoemw53RfR6bKwnu-2GzkWnkau-74HtTK0f3oFIdS4_6H8L1xGzE5lAy5ClV5qMfrK0yG9C8yPunlduhCmY_LrGU6KXjEsJCieINiKKh_PpEOr_Q0cp4VkSii52Non8uUrxN0i2LooHNEDCEkM4adsu-2zBLrHt4lxKD-vf_UUadxk2fDqErjDWAxn5AMOWABY20nZsdzvDw8NQOLCjlb-SIav6OtMZchoXKKWgZQ7On3b0EYuazNUvthRN5yycmqM4joNRMsgOKxC4N4kv04iHSaCD1grINwPicribUwt5rGBD9smnxLVgDHOa3uyqNGWQQ",
 							"type": "string"
 						}
 					]
@@ -105,7 +105,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:5004/api/order/8",
+					"raw": "https://localhost:5004/api/order/1",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -114,7 +114,7 @@
 					"path": [
 						"api",
 						"order",
-						"8"
+						"1"
 					]
 				}
 			},
@@ -136,7 +136,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:5004/api/order/9",
+					"raw": "https://localhost:5004/api/order/1",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -145,7 +145,7 @@
 					"path": [
 						"api",
 						"order",
-						"9"
+						"1"
 					]
 				}
 			},

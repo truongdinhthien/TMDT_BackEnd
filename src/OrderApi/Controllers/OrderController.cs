@@ -122,6 +122,7 @@ namespace OrderApi.Controllers
                                  Address = order.Address,
                                  Fullname = order.Fullname,
                                  PhoneNumber = order.PhoneNumber,
+                                 PaymentIntent = order.PaymentIntent,
                                  BuyerId = user.UserId,
                                  UserId = g.Key,
                                  Status = 1,
@@ -173,10 +174,13 @@ namespace OrderApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrder(int id)
         {
+            StripeConfiguration.ApiKey = "sk_test_DMFHsAZpG7JjAgLSAaWxCEE800SyfwhfoA";
+
             var order = await _context.Orders.Include(o => o.OrderItems).Where(o => o.OrderId == id).SingleOrDefaultAsync();
+
             if (order != null)
             {
-                if(order.Status != 1)
+                if (order.Status != 1)
                     return BadRequest(new { success = false, message = "Order item đã xử lý k thể xóa" });
                 order.Status = 4;
                 await _context.SaveChangesAsync();
@@ -193,6 +197,14 @@ namespace OrderApi.Controllers
                         isAdd = false
                     });
                 };
+
+                var refunds = new RefundService();
+                var refundOptions = new RefundCreateOptions
+                {
+                    PaymentIntent = order.PaymentIntent,
+                    Amount = order.Total
+                };
+                var refund = refunds.Create(refundOptions);
                 return Ok(new { success = true, data = order });
             }
             return NotFound(new { success = false, message = "Order item is not found" });
